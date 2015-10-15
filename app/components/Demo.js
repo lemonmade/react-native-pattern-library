@@ -1,15 +1,15 @@
 import React from 'react-native';
 import Stylish from 'react-stylish/native';
 
-import {Defaults, Spacing, Colors} from '../styles';
+import {Spacing} from '../styles';
 import {resolve} from '../utilities/proptypes';
+import List from './List';
 import CodeBlock from './CodeBlock';
 
 const {
   View,
   Text,
   PropTypes,
-  ListView,
 } = React;
 
 let styles = Stylish.create({});
@@ -24,19 +24,23 @@ export default class Demo extends React.Component {
   constructor(props) {
     super(props);
 
-    let dataSource = new ListView.DataSource({
+    let dataSource = new List.DataSource({
       rowHasChanged(r1, r2) { return r1 !== r2; },
     });
 
     this.state = {dataSource};
   }
 
-  renderSeparator() {
-    return <View style={{borderBottomWidth: Defaults.BORDER_WIDTH, borderBottomColor: Defaults.BORDER_COLOR, marginLeft: Spacing.DEFAULT, marginRight: Spacing.DEFAULT}} />;
-  }
-
-  renderRow(propType) {
-    return <PropTypeRow propType={propType} />;
+  renderRow(propType, section, row, highlight) {
+    return (
+      <List.Cell
+        row={row}
+        section={section}
+        highlight={highlight}
+      >
+        {Object.keys(propType).map((detail) => <Text>{detail}: {propType[detail] != null && propType[detail].toString()}</Text>)}
+      </List.Cell>
+    );
   }
 
   renderHeader() {
@@ -44,24 +48,17 @@ export default class Demo extends React.Component {
 
     return (
       <View style={{padding: Spacing.DEFAULT}}>
-        {children}
+        <View style={{marginBottom: Spacing.DEFAULT}}>
+          {children}
+        </View>
+
         <CodeBlock component={children} />
       </View>
     );
   }
 
   renderSectionHeader() {
-    return (
-      <View style={{padding: Spacing.HALVED / 2, paddingLeft: Spacing.DEFAULT, paddingRight: Spacing.DEFAULT, backgroundColor: Colors.GRAY_LIGHT}}>
-        <Text>Properties</Text>
-      </View>
-    );
-  }
-
-  renderFooter() {
-    return (
-      <View style={{borderBottomWidth: Defaults.BORDER_WIDTH, borderBottomColor: Defaults.BORDER_COLOR, marginTop: -1}} />
-    );
+    return <List.Header>Properties</List.Header>;
   }
 
   render() {
@@ -69,13 +66,11 @@ export default class Demo extends React.Component {
     let data = convertPropTypesToData(Component);
 
     return (
-      <ListView
+      <List
         dataSource={this.state.dataSource.cloneWithRows(data)}
         renderHeader={::this.renderHeader}
-        renderSeparator={this.renderSeparator}
-        renderSectionHeader={this.renderSectionHeader.bind()}
+        renderSectionHeader={this.renderSectionHeader}
         renderRow={this.renderRow}
-        renderFooter={this.renderFooter}
       />
     );
   }
@@ -90,16 +85,4 @@ function convertPropTypesToData(Component) {
       default: defaultProps[propType],
     };
   });
-}
-
-class PropTypeRow extends React.Component {
-  render() {
-    let {propType} = this.props;
-
-    return (
-      <View style={{padding: Spacing.DEFAULT, paddingBottom: Spacing.HALVED, paddingTop: Spacing.HALVED}}>
-        {Object.keys(propType).map((detail) => <Text>{detail}: {propType[detail] != null && propType[detail].toString()}</Text>)}
-      </View>
-    );
-  }
 }
