@@ -1,7 +1,7 @@
 import React from 'react-native';
 import Stylish from 'react-stylish/native';
 
-import {Defaults, Spacing} from '../../styles';
+import {Defaults, Spacing, Colors} from '../../styles';
 
 const {
   Component,
@@ -20,7 +20,7 @@ let styles = Stylish.create({
 
 styles.variations({
   hidden: {
-    border: {borderBottomColor: 'clear'},
+    border: {borderBottomColor: Colors.CLEAR},
   },
 
   full: {

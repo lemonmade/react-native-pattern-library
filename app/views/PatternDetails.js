@@ -1,25 +1,28 @@
 import React from 'react-native';
 import Stylish from 'react-stylish/native';
 
-import {Spacing} from '../styles';
+import PropDetails from './PropDetails';
+import {List, CodeBlock} from '../components';
+import {Spacing, Colors} from '../styles';
 import {resolve} from '../utilities/proptypes';
-import List from './List';
-import CodeBlock from './CodeBlock';
 
 const {
   View,
-  Text,
   PropTypes,
 } = React;
 
 let styles = Stylish.create({});
 
 @Stylish.connect(styles)
-export default class Demo extends React.Component {
+export default class PatternDetails extends React.Component {
   static propTypes = {
-    children: PropTypes.node.isRequired,
     Component: PropTypes.instanceOf(React.Component).isRequired,
-  }
+    props: PropTypes.object,
+  };
+
+  static defaultProps = {
+    props: {},
+  };
 
   constructor(props) {
     super(props);
@@ -38,21 +41,22 @@ export default class Demo extends React.Component {
         section={section}
         highlight={highlight}
       >
-        {Object.keys(propType).map((detail) => <Text>{detail}: {propType[detail] != null && propType[detail].toString()}</Text>)}
+        <PropDetails prop={propType} />
       </List.Cell>
     );
   }
 
   renderHeader() {
-    let {children} = this.props;
+    let {Component, props} = this.props;
+    let rendered = React.createElement(Component, props);
 
     return (
-      <View style={{padding: Spacing.DEFAULT}}>
+      <View style={{padding: Spacing.DEFAULT, backgroundColor: Colors.WHITE}}>
         <View style={{marginBottom: Spacing.DEFAULT}}>
-          {children}
+          {rendered}
         </View>
 
-        <CodeBlock component={children} />
+        <CodeBlock component={rendered} />
       </View>
     );
   }

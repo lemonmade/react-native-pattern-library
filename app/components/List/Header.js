@@ -5,16 +5,15 @@ import {Spacing, Colors} from '../../styles';
 
 const {
   Component,
-  View,
   Text,
 } = React;
 
 let styles = Stylish.create({
-  backing: {
+  heading: {
     padding: Spacing.DEFAULT,
-    paddingTop: Spacing.HALVED / 2,
+    paddingTop: Spacing.HALVED,
     paddingBottom: Spacing.HALVED / 2,
-    backgroundColor: Colors.GRAY_LIGHT,
+    backgroundColor: Colors.GRAY_LIGHTER,
   },
 });
 
@@ -27,10 +26,6 @@ export default class ListHeader extends Component {
   render() {
     let {children} = this.props;
 
-    return (
-      <View styled="backing">
-        <Text>{children}</Text>
-      </View>
-    );
+    return <Text styled="heading">{children}</Text>;
   }
 }

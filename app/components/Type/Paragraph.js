@@ -1,7 +1,7 @@
 import React from 'react-native';
 import Stylish from 'react-stylish/native';
 
-import {Fonts} from '../styles';
+import {Fonts} from '../../styles';
 
 const {
   Text,
@@ -10,17 +10,16 @@ const {
 } = React;
 
 let styles = Stylish.create({
-  heading: {
-    fontSize: Fonts.Sizes.HEADING,
-    fontWeight: 'bold',
+  paragraph: {
+    fontSize: Fonts.Sizes.PARAGRAPH,
   },
 });
 
 @Stylish.connect(styles)
-export class Heading extends Component {
+export default class Paragraph extends Component {
   static propTypes = {children: PropTypes.string.isRequired};
 
   render() {
-    return <Text styled="heading">{this.props.children}</Text>;
+    return <Text styled="paragraph">{this.props.children}</Text>;
   }
 }

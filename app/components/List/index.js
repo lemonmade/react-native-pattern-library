@@ -4,6 +4,8 @@ import Border from './Border';
 import Header from './Header';
 import Cell from './Cell';
 
+import ScrollView from '../ScrollView';
+
 const {
   ListView,
 } = React;
@@ -11,7 +13,7 @@ const {
 export default class List extends ListView {
   static defaultProps = {
     ...ListView.defaultProps,
-    renderSectionHeader,
+    renderScrollComponent,
     renderSeparator,
     renderFooter,
   };
@@ -21,14 +23,14 @@ export default class List extends ListView {
   static Border = Border;
 }
 
-function renderSectionHeader(section) {
-  return <Header>{section}</Header>;
-}
-
-function renderFooter() {
-  return <Border full nudge />;
+function renderScrollComponent(props) {
+  return <ScrollView {...props} />;
 }
 
 function renderSeparator(section, row, adjacentRowHighlighted) {
   return <Border hidden={adjacentRowHighlighted} />;
+}
+
+function renderFooter() {
+  return <Border full nudge />;
 }

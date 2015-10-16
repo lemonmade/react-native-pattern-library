@@ -62,3 +62,7 @@ export function resolve(propType) {
     required: !propType.hasOwnProperty('isRequired'),
   };
 }
+
+export function isSimpleType(type) {
+  return FUNCTION_PROPTYPES.indexOf(type) < 0;
+}

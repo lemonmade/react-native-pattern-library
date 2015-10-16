@@ -1,7 +1,7 @@
 import React from 'react-native';
 import Stylish from 'react-stylish/native';
 
-import {Spacing} from '../../styles';
+import {Spacing, Colors} from '../../styles';
 
 const {
   Component,
@@ -11,6 +11,10 @@ const {
 } = React;
 
 let styles = Stylish.create({
+  container: {
+    backgroundColor: Colors.WHITE,
+  },
+
   cell: {
     padding: Spacing.DEFAULT,
     paddingTop: Spacing.HALVED,
@@ -21,10 +25,15 @@ let styles = Stylish.create({
 @Stylish.connect(styles)
 export default class ListCell extends Component {
   static propTypes = {
+    action: PropTypes.func.isRequired,
     children: View.propTypes.children,
     row: PropTypes.any,
     section: PropTypes.any,
     highlight: PropTypes.func,
+  };
+
+  static defaultProps = {
+    action: () => {},
   };
 
   handlePressStart() {
@@ -42,14 +51,16 @@ export default class ListCell extends Component {
   }
 
   render() {
-    let {children} = this.props;
+    let {children, action} = this.props;
 
     return (
       <TouchableHighlight
-        underlayColor={'clear'}
+        underlayColor={Colors.CLEAR}
         onPressIn={::this.handlePressStart}
         onPressOut={::this.handlePressEnd}
+        onPress={action}
         activeOpacity={1}
+        styled="container"
       >
         <View styled="cell">{children}</View>
       </TouchableHighlight>

@@ -1,4 +1,9 @@
 export const Sizes = {
-  PARAGRAPH: 16,
-  HEADING: 24,
+  BADGE: 10,
+  PARAGRAPH: 14,
+  HEADING: 16,
+};
+
+export const Families = {
+  MONOSPACE: 'Courier',
 };

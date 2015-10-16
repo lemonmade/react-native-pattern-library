@@ -1,12 +1,16 @@
+import Badge from './Badge';
+import BarButton from './BarButton';
+import BulletedList from './BulletedList';
 import CodeBlock from './CodeBlock';
-import Demo from './Demo';
 import List from './List';
 import Table from './Table';
-import * as Type from './Type';
+import Type from './Type';
 
 export {
+  Badge,
+  BarButton,
+  BulletedList,
   CodeBlock,
-  Demo,
   List,
   Table,
   Type,
