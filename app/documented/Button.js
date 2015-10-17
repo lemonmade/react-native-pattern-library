@@ -31,6 +31,13 @@ styles.variations({
   primary: {
     button: {backgroundColor: Colors.GREEN},
   },
+
+  size: {
+    large: {
+      button: {padding: Spacing.DEFAULT},
+      text: {fontSize: Fonts.Sizes.PARAGRAPH * 4},
+    },
+  },
 });
 
 let SIZES = [

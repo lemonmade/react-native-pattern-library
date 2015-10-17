@@ -25,16 +25,14 @@ let styles = Stylish.create({
 @Stylish.connect(styles)
 export default class ListCell extends Component {
   static propTypes = {
-    action: PropTypes.func.isRequired,
-    children: View.propTypes.children,
+    action: PropTypes.func,
+    children: PropTypes.node,
     row: PropTypes.any,
     section: PropTypes.any,
     highlight: PropTypes.func,
   };
 
-  static defaultProps = {
-    action: () => {},
-  };
+  static defaultProps = {};
 
   handlePressStart() {
     let {row, section, highlight} = this.props;
@@ -52,6 +50,14 @@ export default class ListCell extends Component {
 
   render() {
     let {children, action} = this.props;
+
+    if (!action) {
+      return (
+        <View styled="container">
+          <View styled="cell">{children}</View>
+        </View>
+      );
+    }
 
     return (
       <TouchableHighlight

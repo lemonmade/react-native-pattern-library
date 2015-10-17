@@ -6,6 +6,7 @@ import {Spacing, Colors} from '../../styles';
 const {
   Component,
   Text,
+  PropTypes,
 } = React;
 
 let styles = Stylish.create({
@@ -20,7 +21,7 @@ let styles = Stylish.create({
 @Stylish.connect(styles)
 export default class ListHeader extends Component {
   static propTypes = {
-    children: Text.propTypes.children,
+    children: PropTypes.string,
   };
 
   render() {

@@ -40,7 +40,10 @@ export default class PatternList extends React.Component {
         action={() => navigator.push({
           component: PatternDetails,
           title,
-          props: {props: component.props, Component: component.Component},
+          props: {
+            defaultProps: component.props,
+            Component: component.Component,
+          },
         })}
       >
         <Type.Paragraph>{title}</Type.Paragraph>

@@ -1,11 +1,14 @@
 import React from 'react-native';
 import Stylish from 'react-stylish/native';
+import {Provider} from 'react-redux/native';
 
 import {inject} from './utilities/proptypes';
 inject();
 
+import store from './store';
+
 import {Colors} from './styles';
-import {BarButton} from './components';
+import {BarButton, Chooser, Toggle, Field, Banner, Badge} from './components';
 import PatternList from './views/PatternList';
 
 import {Button} from './documented';
@@ -18,10 +21,6 @@ const {
   View,
   StatusBarIOS,
 } = React;
-
-let components = [
-  {Component: Button, props: {children: 'Hello!'}},
-];
 
 const {NavigationBar} = Navigator;
 
@@ -61,13 +60,13 @@ let RouteMapper = {
   LeftButton(route, navigator, index) {
     if (!index) { return null; }
 
-    return <BarButton action={::navigator.pop} />;
+    return <BarButton action={navigator.pop} />;
   },
 
   RightButton() {},
 };
 
-class PatternLibrary extends Component {
+class App extends Component {
   componentWillMount() {
     StatusBarIOS.setStyle('light-content');
   }
@@ -79,6 +78,15 @@ class PatternLibrary extends Component {
   }
 
   render() {
+    let components = [
+      {Component: Button, props: {children: 'Hello!'}},
+      {Component: Chooser, props: {options: ['Hello', 'Goodbye']}},
+      {Component: Toggle},
+      {Component: Field, props: {value: 'Text'}},
+      {Component: Banner, props: {children: 'This is a banner.'}},
+      {Component: Badge, props: {children: 'Sweet'}},
+    ].sort((component1, component2) => component1.Component.displayName.localeCompare(component2.Component.displayName));
+
     return (
       <Navigator
         ref="nav"
@@ -94,8 +102,18 @@ class PatternLibrary extends Component {
           title: 'Pattern Library',
           props: {components},
         }}
-        renderScene={::this.renderScene}
+        renderScene={this.renderScene}
       />
+    );
+  }
+}
+
+class PatternLibrary extends Component {
+  render() {
+    return (
+      <Provider store={store}>
+        {() => <App />}
+      </Provider>
     );
   }
 }

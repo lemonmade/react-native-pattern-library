@@ -13,3 +13,7 @@ export const BLUE_DARK = '#3B62B2';
 
 export const GREEN = '#44C370';
 export const GREEN_DARK = '#379F5B';
+
+export const RED_LIGHT = '#FFCCC8';
+export const RED = '#FF9D9B';
+export const RED_DARK = '#CF4238';

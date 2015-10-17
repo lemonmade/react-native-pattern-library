@@ -10,6 +10,10 @@ const {
 } = React;
 
 let styles = Stylish.create({
+  wrapper: {
+    backgroundColor: Colors.WHITE,
+  },
+
   border: {
     borderBottomWidth: Defaults.BORDER_WIDTH,
     borderBottomColor: Defaults.BORDER_COLOR,
@@ -20,7 +24,7 @@ let styles = Stylish.create({
 
 styles.variations({
   hidden: {
-    border: {borderBottomColor: Colors.CLEAR},
+    border: {borderBottomColor: Colors.WHITE},
   },
 
   full: {
@@ -31,7 +35,7 @@ styles.variations({
   },
 
   nudge: {
-    border: {top: -Defaults.BORDER_WIDTH},
+    wrapper: {top: -Defaults.BORDER_WIDTH},
   },
 });
 
@@ -50,6 +54,10 @@ export default class ListBorder extends Component {
   };
 
   render() {
-    return <View styled="border" />;
+    return (
+      <View styled="wrapper">
+        <View styled="border" />
+      </View>
+    );
   }
 }

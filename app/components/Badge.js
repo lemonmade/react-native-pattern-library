@@ -33,13 +33,14 @@ styles.variations({
 });
 
 @Stylish.connect(styles)
-export default class Code extends Component {
+export default class Badge extends Component {
   static propTypes = {
     children: PropTypes.string.isRequired,
     leftSpacing: PropTypes.bool,
   };
 
   static defaultProps = {
+    children: '',
     leftSpacing: false,
   };
 

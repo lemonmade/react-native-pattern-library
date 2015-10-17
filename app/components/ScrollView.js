@@ -17,6 +17,7 @@ ScrollView.defaultProps = {
   ...React.ScrollView.defaultProps,
   style: styles.listView,
   automaticallyAdjustContentInsets: false,
+  contentInset: {bottom: 400},
 };
 
 export default ScrollView;

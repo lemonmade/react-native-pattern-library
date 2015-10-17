@@ -25,7 +25,7 @@ let styles = Stylish.create({
 
 @Stylish.connect(styles)
 export default class CodeBlock extends Component {
-  static propTypes = {component: PropTypes.instanceOf(Component).isRequired};
+  static propTypes = {component: PropTypes.element.isRequired};
 
   render() {
     let {component} = this.props;

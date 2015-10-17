@@ -20,7 +20,6 @@ let styles = Stylish.create({
 
   icon: {
     color: Colors.WHITE,
-    fontWeight: 'bold',
   },
 });
 
@@ -44,7 +43,7 @@ export default class BarButton extends Component {
         activeOpacity={1}
         onPress={action}
       >
-        <Text styled="icon">{'<'}</Text>
+        <Text styled="icon">Back</Text>
       </TouchableHighlight>
     );
   }
